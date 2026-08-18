@@ -1,0 +1,12 @@
+-- DAX starter measures for Power BI
+Total Customers = DISTINCTCOUNT(Customers[Customer_ID])
+Total Applications = COUNTROWS(Loans)
+Approved Loans = CALCULATE([Total Applications], Loans[Loan_Status] = "Approved")
+Rejected Loans = CALCULATE([Total Applications], Loans[Loan_Status] = "Rejected")
+Pending Loans = CALCULATE([Total Applications], Loans[Loan_Status] = "Pending")
+Defaulted Loans = CALCULATE([Total Applications], Loans[Loan_Status] = "Default")
+Total Loan Amount = SUM(Loans[Loan_Amount])
+Approved Loan Amount = CALCULATE([Total Loan Amount], Loans[Loan_Status] = "Approved")
+Approval Rate = DIVIDE([Approved Loans], [Total Applications], 0)
+Default Rate = DIVIDE([Defaulted Loans], [Total Applications], 0)
+Average Loan Amount = AVERAGE(Loans[Loan_Amount])
